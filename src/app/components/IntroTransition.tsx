@@ -12,8 +12,18 @@ import HomeHeader from "./HomeHeader";
 import HomeHero from "./HomeHero";
 
 const INTRO_SESSION_KEY = "portfolio-intro-complete";
+
 const VIRTUAL_SCROLL_DISTANCE = 1050;
-const HOME_SETTLE_DELAY = 650;
+
+/*
+  The site takes over around the halfway point.
+*/
+const AUTO_FINISH_THRESHOLD = 0.48;
+
+/*
+  Long cinematic pull into the final Home viewport.
+*/
+const AUTO_FINISH_DURATION = 2200;
 
 type CameraGeometry = {
   targetScale: number;
@@ -23,8 +33,15 @@ type CameraGeometry = {
   originY: number;
 };
 
-function clamp(value: number, min = 0, max = 1) {
-  return Math.min(Math.max(value, min), max);
+function clamp(
+  value: number,
+  min = 0,
+  max = 1
+) {
+  return Math.min(
+    Math.max(value, min),
+    max
+  );
 }
 
 function remap(
@@ -39,10 +56,15 @@ function remap(
   }
 
   const normalized = clamp(
-    (value - inputMin) / (inputMax - inputMin)
+    (value - inputMin) /
+      (inputMax - inputMin)
   );
 
-  return outputMin + (outputMax - outputMin) * normalized;
+  return (
+    outputMin +
+    (outputMax - outputMin) *
+      normalized
+  );
 }
 
 function smoothstep(value: number) {
@@ -51,117 +73,186 @@ function smoothstep(value: number) {
   return t * t * (3 - 2 * t);
 }
 
+/*
+  Gentle start, smooth acceleration through the middle,
+  and a soft landing at the final Home viewport.
+*/
+function easeInOutSine(value: number) {
+  const t = clamp(value);
+
+  return -(
+    Math.cos(Math.PI * t) - 1
+  ) / 2;
+}
+
 export default function IntroTransition() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [isReady, setIsReady] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [isVisible, setIsVisible] =
+    useState(true);
 
-  const [camera, setCamera] = useState<CameraGeometry>({
-    targetScale: 5,
-    targetX: 0,
-    targetY: 0,
-    originX: 0,
-    originY: 0,
-  });
+  const [isReady, setIsReady] =
+    useState(false);
 
-  const laptopRef = useRef<HTMLDivElement>(null);
-  const screenRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] =
+    useState(0);
 
-  const progressRef = useRef(0);
-  const touchYRef = useRef<number | null>(null);
-
-  const completedRef = useRef(false);
-  const completionTimerRef = useRef<number | null>(null);
-
-  const calculateCamera = useCallback(() => {
-    const laptop = laptopRef.current;
-    const screen = screenRef.current;
-
-    if (!laptop || !screen) {
-      return;
-    }
-
-    const laptopRect =
-      laptop.getBoundingClientRect();
-
-    const screenRect =
-      screen.getBoundingClientRect();
-
-    if (!screenRect.width || !screenRect.height) {
-      return;
-    }
-
-    const screenCenterX =
-      screenRect.left +
-      screenRect.width / 2;
-
-    const screenCenterY =
-      screenRect.top +
-      screenRect.height / 2;
-
-    const viewportCenterX =
-      window.innerWidth / 2;
-
-    const viewportCenterY =
-      window.innerHeight / 2;
-
-    const widthScale =
-      window.innerWidth /
-      screenRect.width;
-
-    const heightScale =
-      window.innerHeight /
-      screenRect.height;
-
-    const targetScale =
-      Math.max(
-        widthScale,
-        heightScale
-      ) * 1.025;
-
-    const originX =
-      screenCenterX -
-      laptopRect.left;
-
-    const originY =
-      screenCenterY -
-      laptopRect.top;
-
-    const targetX =
-      viewportCenterX -
-      screenCenterX;
-
-    const targetY =
-      viewportCenterY -
-      screenCenterY;
-
-    setCamera({
-      targetScale,
-      targetX,
-      targetY,
-      originX,
-      originY,
+  const [camera, setCamera] =
+    useState<CameraGeometry>({
+      targetScale: 5,
+      targetX: 0,
+      targetY: 0,
+      originX: 0,
+      originY: 0,
     });
-  }, []);
 
-  const releasePage = useCallback(() => {
-    document.documentElement.classList.remove(
-      "intro-active"
-    );
+  const laptopRef =
+    useRef<HTMLDivElement>(null);
 
-    document.body.classList.remove(
-      "intro-active"
-    );
+  const screenRef =
+    useRef<HTMLDivElement>(null);
 
-    document.documentElement.classList.add(
-      "intro-settling"
-    );
+  const progressRef =
+    useRef(0);
 
-    document.body.classList.add(
-      "intro-settling"
-    );
+  const touchYRef =
+    useRef<number | null>(null);
 
-    window.setTimeout(() => {
+  const completedRef =
+    useRef(false);
+
+  const autoFinishingRef =
+    useRef(false);
+
+  const autoFinishFrameRef =
+    useRef<number | null>(null);
+
+  const completionTimerRef =
+    useRef<number | null>(null);
+
+  const calculateCamera =
+    useCallback(() => {
+      const laptop =
+        laptopRef.current;
+
+      const screen =
+        screenRef.current;
+
+      if (!laptop || !screen) {
+        return;
+      }
+
+      const laptopRect =
+        laptop.getBoundingClientRect();
+
+      const screenRect =
+        screen.getBoundingClientRect();
+
+      if (
+        !screenRect.width ||
+        !screenRect.height
+      ) {
+        return;
+      }
+
+      const screenCenterX =
+        screenRect.left +
+        screenRect.width / 2;
+
+      const screenCenterY =
+        screenRect.top +
+        screenRect.height / 2;
+
+      const viewportCenterX =
+        window.innerWidth / 2;
+
+      const viewportCenterY =
+        window.innerHeight / 2;
+
+      const widthScale =
+        window.innerWidth /
+        screenRect.width;
+
+      const heightScale =
+        window.innerHeight /
+        screenRect.height;
+
+      /*
+        Slight overscan ensures the laptop bezel is already
+        beyond the viewport edges before the intro disappears.
+      */
+      const targetScale =
+        Math.max(
+          widthScale,
+          heightScale
+        ) * 1.025;
+
+      /*
+        Anchor the scale around the center of the display,
+        not the center of the full laptop.
+      */
+      const originX =
+        screenCenterX -
+        laptopRect.left;
+
+      const originY =
+        screenCenterY -
+        laptopRect.top;
+
+      /*
+        Bring the display center exactly onto the browser
+        viewport center at the end of the transition.
+      */
+      const targetX =
+        viewportCenterX -
+        screenCenterX;
+
+      const targetY =
+        viewportCenterY -
+        screenCenterY;
+
+      setCamera({
+        targetScale,
+        targetX,
+        targetY,
+        originX,
+        originY,
+      });
+    }, []);
+
+  const finishIntro =
+    useCallback(() => {
+      if (completedRef.current) {
+        return;
+      }
+
+      completedRef.current = true;
+
+      window.sessionStorage.setItem(
+        INTRO_SESSION_KEY,
+        "true"
+      );
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+
+      /*
+        Immediately restore normal page scrolling once
+        the cinematic zoom has fully completed.
+      */
+      document.documentElement.classList.remove(
+        "intro-active"
+      );
+
+      document.body.classList.remove(
+        "intro-active"
+      );
+
+      /*
+        Remove this as well in case it remains from
+        an older hot-reloaded version during development.
+      */
       document.documentElement.classList.remove(
         "intro-settling"
       );
@@ -169,73 +260,138 @@ export default function IntroTransition() {
       document.body.classList.remove(
         "intro-settling"
       );
-    }, HOME_SETTLE_DELAY);
-  }, []);
 
-  const finishIntro = useCallback(() => {
-    if (completedRef.current) {
-      return;
-    }
+      setIsVisible(false);
+    }, []);
 
-    completedRef.current = true;
-
-    window.sessionStorage.setItem(
-      INTRO_SESSION_KEY,
-      "true"
-    );
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "auto",
-    });
-
-    setIsVisible(false);
-
-    releasePage();
-  }, [releasePage]);
-
-  const scheduleCompletion = useCallback(() => {
-    if (
-      completionTimerRef.current !== null
-    ) {
-      return;
-    }
-
-    completionTimerRef.current =
-      window.setTimeout(() => {
-        finishIntro();
-      }, 130);
-  }, [finishIntro]);
-
-  const updateProgress = useCallback(
-    (nextProgress: number) => {
-      if (completedRef.current) {
+  const scheduleCompletion =
+    useCallback(() => {
+      if (
+        completionTimerRef.current !==
+        null
+      ) {
         return;
       }
 
-      const next =
-        clamp(nextProgress);
+      /*
+        Tiny buffer lets the last animation frame fully
+        render before the intro layer disappears.
+      */
+      completionTimerRef.current =
+        window.setTimeout(() => {
+          finishIntro();
+        }, 130);
+    }, [finishIntro]);
 
-      progressRef.current = next;
-
-      setProgress(next);
-
-      if (next >= 0.999) {
-        scheduleCompletion();
-      } else if (
-        completionTimerRef.current !== null
+  const beginAutoFinish =
+    useCallback(() => {
+      if (
+        autoFinishingRef.current ||
+        completedRef.current
       ) {
-        window.clearTimeout(
-          completionTimerRef.current
+        return;
+      }
+
+      autoFinishingRef.current = true;
+
+      const startProgress =
+        progressRef.current;
+
+      const remaining =
+        1 - startProgress;
+
+      const startTime =
+        performance.now();
+
+      function animate(
+        currentTime: number
+      ) {
+        if (
+          completedRef.current
+        ) {
+          return;
+        }
+
+        const elapsed =
+          currentTime -
+          startTime;
+
+        const normalized =
+          clamp(
+            elapsed /
+              AUTO_FINISH_DURATION
+          );
+
+        const eased =
+          easeInOutSine(
+            normalized
+          );
+
+        const nextProgress =
+          startProgress +
+          remaining * eased;
+
+        progressRef.current =
+          nextProgress;
+
+        setProgress(
+          nextProgress
         );
 
-        completionTimerRef.current =
-          null;
+        if (normalized < 1) {
+          autoFinishFrameRef.current =
+            window.requestAnimationFrame(
+              animate
+            );
+
+          return;
+        }
+
+        progressRef.current = 1;
+
+        setProgress(1);
+
+        scheduleCompletion();
       }
-    },
-    [scheduleCompletion]
-  );
+
+      autoFinishFrameRef.current =
+        window.requestAnimationFrame(
+          animate
+        );
+    }, [scheduleCompletion]);
+
+  const updateProgress =
+    useCallback(
+      (nextProgress: number) => {
+        if (
+          completedRef.current ||
+          autoFinishingRef.current
+        ) {
+          return;
+        }
+
+        const next =
+          clamp(nextProgress);
+
+        progressRef.current =
+          next;
+
+        setProgress(next);
+
+        /*
+          Once the user has clearly committed to entering
+          the site, transition control passes to the
+          cinematic auto-finish.
+        */
+        if (
+          next >=
+          AUTO_FINISH_THRESHOLD
+        ) {
+          beginAutoFinish();
+        }
+      },
+      [beginAutoFinish]
+    );
 
   useEffect(() => {
     const reducedMotion =
@@ -258,7 +414,8 @@ export default function IntroTransition() {
 
     if (
       reducedMotion ||
-      (alreadyPlayed && !forceReplay)
+      (alreadyPlayed &&
+        !forceReplay)
     ) {
       completedRef.current = true;
 
@@ -268,7 +425,9 @@ export default function IntroTransition() {
         }, 0);
 
       return () => {
-        window.clearTimeout(timer);
+        window.clearTimeout(
+          timer
+        );
       };
     }
 
@@ -284,6 +443,18 @@ export default function IntroTransition() {
 
     document.body.classList.add(
       "intro-active"
+    );
+
+    /*
+      Clear any stale development state left behind
+      by an earlier hot reload.
+    */
+    document.documentElement.classList.remove(
+      "intro-settling"
+    );
+
+    document.body.classList.remove(
+      "intro-settling"
     );
 
     const readyTimer =
@@ -306,6 +477,15 @@ export default function IntroTransition() {
       );
 
       if (
+        autoFinishFrameRef.current !==
+        null
+      ) {
+        window.cancelAnimationFrame(
+          autoFinishFrameRef.current
+        );
+      }
+
+      if (
         completionTimerRef.current !==
         null
       ) {
@@ -313,11 +493,30 @@ export default function IntroTransition() {
           completionTimerRef.current
         );
       }
+
+      document.documentElement.classList.remove(
+        "intro-active"
+      );
+
+      document.body.classList.remove(
+        "intro-active"
+      );
+
+      document.documentElement.classList.remove(
+        "intro-settling"
+      );
+
+      document.body.classList.remove(
+        "intro-settling"
+      );
     };
   }, [calculateCamera]);
 
   useEffect(() => {
-    if (!isVisible || !isReady) {
+    if (
+      !isVisible ||
+      !isReady
+    ) {
       return;
     }
 
@@ -325,6 +524,17 @@ export default function IntroTransition() {
       event: WheelEvent
     ) {
       event.preventDefault();
+
+      /*
+        Once the automatic camera movement begins,
+        additional wheel input no longer changes
+        the transition.
+      */
+      if (
+        autoFinishingRef.current
+      ) {
+        return;
+      }
 
       const normalizedDelta =
         clamp(
@@ -343,7 +553,9 @@ export default function IntroTransition() {
     function handleKeyDown(
       event: KeyboardEvent
     ) {
-      if (event.key === "Escape") {
+      if (
+        event.key === "Escape"
+      ) {
         event.preventDefault();
 
         finishIntro();
@@ -352,8 +564,18 @@ export default function IntroTransition() {
       }
 
       if (
-        event.key === "ArrowDown" ||
-        event.key === "PageDown" ||
+        autoFinishingRef.current
+      ) {
+        event.preventDefault();
+
+        return;
+      }
+
+      if (
+        event.key ===
+          "ArrowDown" ||
+        event.key ===
+          "PageDown" ||
         event.key === " " ||
         event.key === "Enter"
       ) {
@@ -368,8 +590,10 @@ export default function IntroTransition() {
       }
 
       if (
-        event.key === "ArrowUp" ||
-        event.key === "PageUp"
+        event.key ===
+          "ArrowUp" ||
+        event.key ===
+          "PageUp"
       ) {
         event.preventDefault();
 
@@ -384,19 +608,30 @@ export default function IntroTransition() {
       event: TouchEvent
     ) {
       touchYRef.current =
-        event.touches[0]?.clientY ??
+        event.touches[0]
+          ?.clientY ??
         null;
     }
 
     function handleTouchMove(
       event: TouchEvent
     ) {
+      if (
+        autoFinishingRef.current
+      ) {
+        event.preventDefault();
+
+        return;
+      }
+
       const currentY =
-        event.touches[0]?.clientY;
+        event.touches[0]
+          ?.clientY;
 
       if (
         currentY === undefined ||
-        touchYRef.current === null
+        touchYRef.current ===
+          null
       ) {
         return;
       }
@@ -423,8 +658,13 @@ export default function IntroTransition() {
 
     function handleResize() {
       if (
-        progressRef.current >
-        0
+        autoFinishingRef.current
+      ) {
+        return;
+      }
+
+      if (
+        progressRef.current > 0
       ) {
         progressRef.current = 0;
 
@@ -524,6 +764,10 @@ export default function IntroTransition() {
     return null;
   }
 
+  /*
+    Both manual scrolling and the automatic takeover
+    feed the same progress timeline.
+  */
   const zoomProgress =
     smoothstep(
       remap(
@@ -548,6 +792,14 @@ export default function IntroTransition() {
     camera.targetY *
     zoomProgress;
 
+  /*
+    At the final frame:
+
+    laptopScale × replicaScale = 1
+
+    so the Home page inside the laptop reaches exact
+    browser scale immediately before the overlay disappears.
+  */
   const replicaScale =
     1 /
     camera.targetScale;
