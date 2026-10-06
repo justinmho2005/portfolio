@@ -100,15 +100,23 @@ a {
   overflow: hidden;
   background:
     linear-gradient(rgba(20, 15, 28, 0.18), rgba(20, 15, 28, 0.62)),
-    url("/hero-placeholder.jpg") center/cover;
+    url("/hero-white-mountains.png") center/cover;
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 22% 25%, rgba(139, 92, 246, 0.24), transparent 34%),
-    linear-gradient(to top, rgba(20, 15, 28, 0.96), transparent 48%);
+    radial-gradient(
+      circle at 22% 25%,
+      rgba(139, 92, 246, 0.24),
+      transparent 34%
+    ),
+    linear-gradient(
+      to top,
+      rgba(20, 15, 28, 0.96),
+      transparent 48%
+    );
 }
 
 .hero__content {
@@ -211,7 +219,11 @@ a {
 
 .section--dark {
   background:
-    radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.08), transparent 38%),
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(139, 92, 246, 0.08),
+      transparent 38%
+    ),
     var(--bg-primary);
 }
 
@@ -278,7 +290,11 @@ a {
   border: 1px solid var(--border-dark);
   border-radius: 28px;
   overflow: hidden;
-  background: linear-gradient(180deg, #251a31 0%, #1a1322 100%);
+  background: linear-gradient(
+    180deg,
+    #251a31 0%,
+    #1a1322 100%
+  );
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
 }
 
@@ -300,7 +316,11 @@ a {
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(circle at center, rgba(139, 92, 246, 0.18), transparent 56%),
+    radial-gradient(
+      circle at center,
+      rgba(139, 92, 246, 0.18),
+      transparent 56%
+    ),
     #17101f;
 }
 
@@ -325,7 +345,11 @@ a {
   place-items: center;
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(185, 160, 255, 0.04)),
+    linear-gradient(
+      135deg,
+      rgba(139, 92, 246, 0.16),
+      rgba(185, 160, 255, 0.04)
+    ),
     #0f0c14;
   color: #8f8798;
   font-size: 0.88rem;
@@ -438,7 +462,11 @@ a {
 .skills-strip {
   padding: 80px 0;
   background:
-    linear-gradient(180deg, rgba(139, 92, 246, 0.05), transparent),
+    linear-gradient(
+      180deg,
+      rgba(139, 92, 246, 0.05),
+      transparent
+    ),
     var(--bg-secondary);
 }
 
@@ -476,16 +504,27 @@ a {
   align-items: center;
   overflow: hidden;
   background:
-    linear-gradient(rgba(20, 15, 28, 0.2), rgba(20, 15, 28, 0.82)),
-    url("/hero-placeholder.jpg") center/cover;
+    linear-gradient(
+      rgba(20, 15, 28, 0.2),
+      rgba(20, 15, 28, 0.82)
+    ),
+    url("/hero-white-mountains.png") center/cover;
 }
 
 .contact-cta__overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.2), transparent 32%),
-    linear-gradient(to right, rgba(20, 15, 28, 0.96), rgba(20, 15, 28, 0.35));
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(139, 92, 246, 0.2),
+      transparent 32%
+    ),
+    linear-gradient(
+      to right,
+      rgba(20, 15, 28, 0.96),
+      rgba(20, 15, 28, 0.35)
+    );
 }
 
 .contact-cta__content {
