@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <div className="site-header__inner">
+        <div className="site-header__inner page-shell">
           <a href="#top" className="brand">
             Justin Ho
           </a>
@@ -48,7 +48,6 @@ export default function Home() {
         <div className="page-shell about-grid">
           <div>
             <p className="section-kicker">About</p>
-
             <h2>Engineering with both systems thinking and attention to detail.</h2>
           </div>
 
@@ -78,7 +77,6 @@ export default function Home() {
               <p className="section-kicker section-kicker--purple">
                 Featured Projects
               </p>
-
               <h2>Things I’ve built.</h2>
             </div>
 
@@ -88,36 +86,142 @@ export default function Home() {
           </div>
 
           <div className="project-stage">
-            <article className="project-card project-card--side">
-              <div className="project-visual">
-                <div className="project-laptop">
+            <div className="project-visual-row">
+              <div className="project-visual-shell project-visual-shell--left">
+                <div className="project-laptop project-laptop--side">
                   <div className="project-screen">
-                    <span>Project Preview</span>
+                    <div className="screen-ui screen-ui--embedded">
+                      <div className="screen-ui__topbar">
+                        <span className="screen-dot" />
+                        <span className="screen-dot" />
+                        <span className="screen-dot" />
+                      </div>
+
+                      <div className="screen-ui__title-sm">Embedded Systems</div>
+
+                      <div className="screen-ui__mini-card">
+                        <span>Sensor</span>
+                        <span className="screen-ui__pill">Active</span>
+                      </div>
+
+                      <div className="screen-ui__line short" />
+                      <div className="screen-ui__line" />
+                      <div className="screen-ui__line medium" />
+
+                      <div className="screen-ui__graph">
+                        <span />
+                        <span />
+                        <span />
+                        <span />
+                      </div>
+                    </div>
                   </div>
+
+                  <div className="project-laptop__base" />
                 </div>
               </div>
 
-              <div className="project-card__content">
+              <div className="project-visual-shell project-visual-shell--center">
+                <div className="project-laptop project-laptop--featured">
+                  <div className="project-screen project-screen--featured">
+                    <div className="screen-ui screen-ui--featured">
+                      <p className="screen-ui__badge">SystemVerilog</p>
+                      <h3 className="screen-ui__hero-title">Register File + ALU</h3>
+
+                      <div className="screen-ui__code">
+                        <span />
+                        <span />
+                        <span />
+                        <span />
+                      </div>
+
+                      <div className="screen-ui__stats">
+                        <div>
+                          <strong>32</strong>
+                          <span>Registers</span>
+                        </div>
+                        <div>
+                          <strong>16</strong>
+                          <span>Ops</span>
+                        </div>
+                        <div>
+                          <strong>FPGA</strong>
+                          <span>Target</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="project-laptop__base project-laptop__base--featured" />
+                </div>
+              </div>
+
+              <div className="project-visual-shell project-visual-shell--right">
+                <div className="project-laptop project-laptop--side">
+                  <div className="project-screen">
+                    <div className="screen-ui screen-ui--software">
+                      <div className="screen-ui__topbar">
+                        <span className="screen-dot" />
+                        <span className="screen-dot" />
+                        <span className="screen-dot" />
+                      </div>
+
+                      <div className="screen-ui__title-sm">Software Project</div>
+
+                      <div className="screen-ui__window">
+                        <div className="screen-ui__window-sidebar" />
+                        <div className="screen-ui__window-main">
+                          <div className="screen-ui__line short" />
+                          <div className="screen-ui__line medium" />
+                          <div className="screen-ui__line" />
+                          <div className="screen-ui__line short" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="project-laptop__base" />
+                </div>
+              </div>
+
+              <div className="project-hardware">
+                <div className="chip-card">
+                  <div className="chip-card__pins chip-card__pins--left">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+
+                  <div className="chip-card__pins chip-card__pins--right">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+
+                  <div className="chip-card__trace chip-card__trace--top" />
+                  <div className="chip-card__trace chip-card__trace--bottom" />
+
+                  <div className="chip-card__core">FPGA</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card-row">
+              <article className="project-copy">
                 <p className="project-index">01</p>
                 <h3>Embedded Systems Project</h3>
                 <p>
                   Hardware and software working together in a complete system.
                 </p>
-              </div>
-            </article>
+              </article>
 
-            <article className="project-card project-card--featured">
-              <div className="project-visual">
-                <div className="project-laptop project-laptop--featured">
-                  <div className="project-screen project-screen--featured">
-                    <span>Featured Project</span>
-                  </div>
-                </div>
-
-                <div className="project-hardware">FPGA</div>
-              </div>
-
-              <div className="project-card__content">
+              <article className="project-copy project-copy--featured">
                 <p className="project-index">02</p>
                 <h3>Register File + ALU System</h3>
                 <p>
@@ -130,26 +234,16 @@ export default function Home() {
                   <span>FPGA</span>
                   <span>Vivado</span>
                 </div>
-              </div>
-            </article>
+              </article>
 
-            <article className="project-card project-card--side">
-              <div className="project-visual">
-                <div className="project-laptop">
-                  <div className="project-screen">
-                    <span>Project Preview</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="project-card__content">
+              <article className="project-copy">
                 <p className="project-index">03</p>
                 <h3>Software Project</h3>
                 <p>
                   A polished technical project focused on clean implementation.
                 </p>
-              </div>
-            </article>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -171,6 +265,7 @@ export default function Home() {
                 A future space for your first substantial co-op experience,
                 responsibilities, technologies, and measurable impact.
               </p>
+
               <div className="tag-row tag-row--light">
                 <span>Engineering</span>
                 <span>Collaboration</span>
@@ -185,6 +280,7 @@ export default function Home() {
                 A second professional experience card following the same visual
                 system and structure.
               </p>
+
               <div className="tag-row tag-row--light">
                 <span>Development</span>
                 <span>Testing</span>
@@ -254,7 +350,10 @@ export default function Home() {
           </p>
 
           <div className="hero__actions">
-            <a className="button button--primary" href="mailto:your-email@example.com">
+            <a
+              className="button button--primary"
+              href="mailto:justinho2023.edu@gmail.com"
+            >
               Email me
             </a>
 
@@ -262,7 +361,12 @@ export default function Home() {
               LinkedIn
             </a>
 
-            <a className="button button--secondary" href="#">
+            <a
+              className="button button--secondary"
+              href="https://github.com/justinmho2005"
+              target="_blank"
+              rel="noreferrer"
+            >
               GitHub
             </a>
           </div>
