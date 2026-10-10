@@ -18,7 +18,7 @@ const VIRTUAL_SCROLL_DISTANCE = 1050;
 /*
   The site takes over around the halfway point.
 */
-const AUTO_FINISH_THRESHOLD = 0.48;
+const AUTO_FINISH_THRESHOLD = 0.58;
 
 /*
   Long cinematic pull into the final Home viewport.

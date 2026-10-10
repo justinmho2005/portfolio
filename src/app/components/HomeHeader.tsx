@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function HomeHeader() {
   return (
     <header className="site-header">
@@ -8,10 +9,10 @@ export default function HomeHeader() {
 
         <nav className="nav" aria-label="Primary navigation">
           <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#contact">Contact</a>
+          <Link href="/projects">Projects</Link>
+          <Link href="/experience">Experience</Link>
+          <Link href="/education">Education</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </div>
     </header>

@@ -1,3 +1,7 @@
+import Link from "next/link";
+import ProjectCard from "./components/ProjectCard";
+import { projects } from "../data/projects";
+
 import HomeHeader from "./components/HomeHeader";
 import HomeHero from "./components/HomeHero";
 import IntroTransition from "./components/IntroTransition";
@@ -11,31 +15,28 @@ export default function Home() {
         <HomeHeader />
         <HomeHero />
 
-        <section id="about" className="section section--light">
+        <section
+          id="about"
+          className="section section--light"
+        >
           <div className="page-shell about-grid">
             <div>
-              <p className="section-kicker">About</p>
+              <p className="section-kicker">
+                About
+              </p>
 
               <h2>
-                Engineering with both systems thinking and attention to detail.
+                Engineering with both systems
+                thinking and attention to detail.
               </h2>
             </div>
 
             <div className="about-copy">
-              <p>
-                I’m a Computer Engineering student focused on building systems
-                that bridge hardware and software.
-              </p>
-
-              <p>
-                My work spans digital design, embedded systems, software, and
-                engineering projects where implementation quality matters just
-                as much as the idea itself.
-              </p>
-
-              <a className="text-link" href="#experience">
-                More about my experience →
-              </a>
+              <p>I’m Justin, a Computer Engineering student at Northeastern University. My work connects digital hardware, embedded software, and the circuits that turn physical signals into usable information.</p>
+              <p>My projects span FPGA-based servo control, a RISC-V-style processor, ECG signal conditioning, and analog circuit design. They give me experience moving between system diagrams, implementation, simulation, and measurements.</p>
+              <p>Through co-ops at Fresenius Medical Care and Charles River Development, I’ve worked on embedded software verification, containerization, deployment workflows, and integration testing.</p>
+              <p>Across these areas, I’m interested in how the pieces fit together: how hardware and software interact, how a design behaves in practice, and how testing helps make that behavior easier to understand.</p>
+              <Link className="text-link" href="/experience">More about my experience →</Link>
             </div>
           </div>
         </section>
@@ -51,232 +52,143 @@ export default function Home() {
                   Featured Projects
                 </p>
 
-                <h2>Things I’ve built.</h2>
+                <h2>
+                  Highlighted work.
+                </h2>
               </div>
 
-              <a className="text-link text-link--light" href="/projects">
+              <Link
+                className="text-link text-link--light"
+                href="/projects"
+              >
                 View all projects →
-              </a>
+              </Link>
             </div>
 
-            <div className="project-stage">
-              <div className="project-visual-row">
-                <div className="project-visual-shell project-visual-shell--left">
-                  <div className="project-laptop project-laptop--side">
-                    <div className="project-screen">
-                      <div className="screen-ui screen-ui--embedded">
-                        <div className="screen-ui__topbar">
-                          <span className="screen-dot" />
-                          <span className="screen-dot" />
-                          <span className="screen-dot" />
-                        </div>
-
-                        <div className="screen-ui__title-sm">
-                          Embedded Systems
-                        </div>
-
-                        <div className="screen-ui__mini-card">
-                          <span>Sensor</span>
-                          <span className="screen-ui__pill">Active</span>
-                        </div>
-
-                        <div className="screen-ui__line short" />
-                        <div className="screen-ui__line" />
-                        <div className="screen-ui__line medium" />
-
-                        <div className="screen-ui__graph">
-                          <span />
-                          <span />
-                          <span />
-                          <span />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="project-laptop__base" />
-                  </div>
-                </div>
-
-                <div className="project-visual-shell project-visual-shell--center">
-                  <div className="project-laptop project-laptop--featured">
-                    <div className="project-screen project-screen--featured">
-                      <div className="screen-ui screen-ui--featured">
-                        <p className="screen-ui__badge">SystemVerilog</p>
-
-                        <h3 className="screen-ui__hero-title">
-                          Register File + ALU
-                        </h3>
-
-                        <div className="screen-ui__code">
-                          <span />
-                          <span />
-                          <span />
-                          <span />
-                        </div>
-
-                        <div className="screen-ui__stats">
-                          <div>
-                            <strong>32</strong>
-                            <span>Registers</span>
-                          </div>
-
-                          <div>
-                            <strong>16</strong>
-                            <span>Ops</span>
-                          </div>
-
-                          <div>
-                            <strong>FPGA</strong>
-                            <span>Target</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="project-laptop__base project-laptop__base--featured" />
-                  </div>
-                </div>
-
-                <div className="project-visual-shell project-visual-shell--right">
-                  <div className="project-laptop project-laptop--side">
-                    <div className="project-screen">
-                      <div className="screen-ui screen-ui--software">
-                        <div className="screen-ui__topbar">
-                          <span className="screen-dot" />
-                          <span className="screen-dot" />
-                          <span className="screen-dot" />
-                        </div>
-
-                        <div className="screen-ui__title-sm">
-                          Software Project
-                        </div>
-
-                        <div className="screen-ui__window">
-                          <div className="screen-ui__window-sidebar" />
-
-                          <div className="screen-ui__window-main">
-                            <div className="screen-ui__line short" />
-                            <div className="screen-ui__line medium" />
-                            <div className="screen-ui__line" />
-                            <div className="screen-ui__line short" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="project-laptop__base" />
-                  </div>
-                </div>
-
-                <div className="project-hardware">
-                  <div className="chip-card">
-                    <div className="chip-card__pins chip-card__pins--left">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-
-                    <div className="chip-card__pins chip-card__pins--right">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-
-                    <div className="chip-card__trace chip-card__trace--top" />
-                    <div className="chip-card__trace chip-card__trace--bottom" />
-
-                    <div className="chip-card__core">FPGA</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="project-card-row">
-                <article className="project-copy">
-                  <p className="project-index">01</p>
-                  <h3>Embedded Systems Project</h3>
-
-                  <p>
-                    Hardware and software working together in a complete system.
-                  </p>
-                </article>
-
-                <article className="project-copy project-copy--featured">
-                  <p className="project-index">02</p>
-
-                  <h3>Register File + ALU System</h3>
-
-                  <p>
-                    Digital design, SystemVerilog, verification, and FPGA
-                    implementation brought together in one engineering workflow.
-                  </p>
-
-                  <div className="tag-row">
-                    <span>SystemVerilog</span>
-                    <span>FPGA</span>
-                    <span>Vivado</span>
-                  </div>
-                </article>
-
-                <article className="project-copy">
-                  <p className="project-index">03</p>
-                  <h3>Software Project</h3>
-
-                  <p>
-                    A polished technical project focused on clean implementation.
-                  </p>
-                </article>
+            <div className="project-showcase">
+              <div className="project-laptops">{projects.filter(project => project.slug !== "analog-circuit-design").map((project, index) => <ProjectCard key={project.slug} project={project} index={index} />)}
               </div>
             </div>
           </div>
         </section>
 
-        <section id="experience" className="section section--light">
+        <section
+          id="experience"
+          className="section section--light"
+        >
           <div className="page-shell">
             <div className="section-heading section-heading--dark">
               <div>
-                <p className="section-kicker">Experience</p>
-                <h2>Engineering in the real world.</h2>
+                <p className="section-kicker">
+                  Experience
+                </p>
+
+                <h2>
+                  Engineering in the real world.
+                </h2>
               </div>
             </div>
 
             <div className="experience-grid">
               <article className="experience-card">
-                <p className="experience-card__label">Co-op Experience</p>
+                <p className="experience-card__label">
+                  Jul 2026 – Present ·
+                  Lawrence, MA
+                </p>
 
-                <h3>Company / Role</h3>
+                <h3>
+                  Fresenius Medical Care
+                </h3>
 
                 <p>
-                  A future space for your first substantial co-op experience,
-                  responsibilities, technologies, and measurable impact.
+                  <strong>
+                    Embedded Software Engineering
+                    Co-op
+                  </strong>
+                </p>
+
+                <p>
+                  Contributing to an embedded Audit
+                  Log system using C++ and JSON, with
+                  a focus on refactoring for
+                  maintainability, developing
+                  mock-based unit tests, and
+                  improving test automation to make
+                  verification more scalable and
+                  resilient to future software
+                  changes.
                 </p>
 
                 <div className="tag-row tag-row--light">
-                  <span>Engineering</span>
-                  <span>Collaboration</span>
-                  <span>Systems</span>
+                  <span>
+                    C++
+                  </span>
+
+                  <span>
+                    JSON
+                  </span>
+
+                  <span>
+                    Linux
+                  </span>
+
+                  <span>
+                    Unit Testing
+                  </span>
+
+                  <span>
+                    Mocks
+                  </span>
+
+                  <span>
+                    Test Automation
+                  </span>
                 </div>
               </article>
 
               <article className="experience-card">
-                <p className="experience-card__label">Co-op Experience</p>
+                <p className="experience-card__label">
+                  Jan 2025 – Jun 2025 ·
+                  Burlington, MA
+                </p>
 
-                <h3>Company / Role</h3>
+                <h3>
+                  Charles River Development
+                </h3>
 
                 <p>
-                  A second professional experience card following the same visual
-                  system and structure.
+                  <strong>
+                    Software Engineer Co-op
+                  </strong>
+                </p>
+
+                <p>
+                  Worked on the Charles River Wealth
+                  Hub, implementing Docker-based
+                  containerization, supporting
+                  deployment workflows across
+                  distributed microservices, and
+                  performing integration testing to
+                  improve release reliability and
+                  environment reproducibility.
                 </p>
 
                 <div className="tag-row tag-row--light">
-                  <span>Development</span>
-                  <span>Testing</span>
-                  <span>Problem Solving</span>
+                  <span>
+                    Docker
+                  </span>
+
+                  <span>
+                    Microservices
+                  </span>
+
+                  <span>
+                    Integration Testing
+                  </span>
+
+                  <span>
+                    Deployment
+                  </span>
                 </div>
               </article>
             </div>
@@ -291,29 +203,54 @@ export default function Home() {
 
             <div className="skills-grid">
               <div>
-                <h3>Hardware</h3>
-                <p>FPGA · Digital Logic · Embedded Systems · Circuit Design</p>
+                <h3>
+                  Hardware
+                </h3>
+
+                <p>
+                  FPGA · Digital Logic · Embedded
+                  Systems · Circuit Design
+                </p>
               </div>
 
               <div>
-                <h3>Software</h3>
-                <p>TypeScript · Python · C/C++ · React · Next.js</p>
+                <h3>
+                  Software
+                </h3>
+
+                <p>
+                  TypeScript · Python · C/C++ ·
+                  React · Next.js
+                </p>
               </div>
 
               <div>
-                <h3>Tools</h3>
-                <p>Vivado · Git · VS Code · MATLAB · Simulation</p>
+                <h3>
+                  Tools
+                </h3>
+
+                <p>
+                  Vivado · Git · VS Code · MATLAB ·
+                  Simulation
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="education" className="section section--light">
+        <section
+          id="education"
+          className="section section--light"
+        >
           <div className="page-shell education-grid">
             <div>
-              <p className="section-kicker">Education</p>
+              <p className="section-kicker">
+                Education
+              </p>
 
-              <h2>Northeastern University</h2>
+              <h2>
+                Northeastern University
+              </h2>
 
               <p className="education-degree">
                 B.S. in Computer Engineering
@@ -322,19 +259,27 @@ export default function Home() {
 
             <div className="education-panel">
               <p>
-                A curriculum built around engineering fundamentals, digital
-                systems, computer architecture, embedded systems, and
-                experiential learning through Northeastern’s co-op model.
+                A curriculum built around engineering
+                fundamentals, digital systems,
+                computer architecture, embedded
+                systems, and experiential learning
+                through Northeastern’s co-op model.
               </p>
 
-              <a className="text-link" href="/education">
+              <Link
+                className="text-link"
+                href="/education"
+              >
                 Explore education →
-              </a>
+              </Link>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="contact-cta">
+        <section
+          id="contact"
+          className="contact-cta"
+        >
           <div className="contact-cta__overlay" />
 
           <div className="page-shell contact-cta__content">
@@ -342,44 +287,46 @@ export default function Home() {
               Contact
             </p>
 
-            <h2>Let’s build something.</h2>
+            <h2>
+              Let’s build something.
+            </h2>
 
             <p>
-              I’m always interested in engineering opportunities, technical
-              projects, and conversations about interesting systems.
+              I’m always interested in engineering
+              opportunities, technical projects, and
+              conversations about interesting
+              systems.
             </p>
 
             <div className="hero__actions">
-              <a
-                className="button button--primary"
-                href="mailto:justinho2023.edu@gmail.com"
-              >
-                Email me
-              </a>
+              <Link className="button button--primary" href="/contact">Get in touch</Link>
 
-              <a className="button button--secondary" href="#">
-                LinkedIn
-              </a>
+              <span className="contact-placeholder">LinkedIn — link to add</span>
 
-              <a
-                className="button button--secondary"
-                href="https://github.com/justinmho2005"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
+              <span className="contact-placeholder">GitHub — link to add</span>
             </div>
           </div>
         </section>
 
         <footer className="footer">
           <div className="page-shell footer__inner">
-            <p>© 2026 Justin Ho</p>
-            <p>Built with Next.js</p>
+            <p>
+              © 2026 Justin Ho
+            </p>
+
+            <p>
+              Built with Next.js
+            </p>
           </div>
         </footer>
       </main>
     </>
   );
 }
+
+
+
+
+
+
+
