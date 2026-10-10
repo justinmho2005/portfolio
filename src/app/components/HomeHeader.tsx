@@ -12,9 +12,11 @@ export default function HomeHeader() {
           <Link href="/projects">Projects</Link>
           <Link href="/experience">Experience</Link>
           <Link href="/education">Education</Link>
+          <Link href="/resume">Résumé</Link>
           <Link href="/contact">Contact</Link>
         </nav>
       </div>
     </header>
   );
 }
+

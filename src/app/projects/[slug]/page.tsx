@@ -6,36 +6,39 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/projects";
+import styles from "./case-study.module.css";
+
 type Props = { params: Promise<{ slug: string }> };
+const records: Record<string, { date: string; context: string; platform: string; overview: string; facts: [string,string][]; flow: string[] }> = {
+  "hexapod-robot": { date: "Fall 2024", context: "EECE 2160 · Partner project", platform: "DE10-Nano · Quartus", overview: "From a clock signal to independent servo control: adjustable PWM, stored position values, bounded updates, and joint selection.", facts: [["50 MHz", "Input clock"], ["20 ms", "PWM period"], ["3 joints", "One-leg control"], ["Lab reports", "Hardware observations"]], flow: ["Position input", "Bounded update", "PWM generator", "Servo joint"] },
+  "riscv-processor": { date: "Project date to add", context: "Project context to add", platform: "Xilinx Zynq · Vivado", overview: "A single-cycle datapath connects instruction decoding, register access, arithmetic, memory, and branching on an FPGA.", facts: [["Single cycle", "Processor design"], ["16-bit", "Labeled datapath"], ["SystemVerilog", "Hardware description"], ["Zynq FPGA", "Target platform"]], flow: ["Instruction fetch", "Decode & registers", "ALU & memory", "Write-back / branch"] },
+  "ecg-signal-conditioning": { date: "Fall 2025", context: "EECE 2150 · Labs 14–15", platform: "AD627 · LT1490", overview: "Instrumentation amplification and active filtering prepare a small ECG signal for acquisition, with separate MATLAB exercises exploring synthetic-signal processing.", facts: [["≈25", "Reported amplifier gain"], ["≈0.5 Hz", "High-pass design"], ["≈34 Hz", "Low-pass design"], ["≈82 dB", "Reported CMRR"]], flow: ["Differential signal", "AD627 amplifier", "High-pass / low-pass", "Acquisition preparation"] },
+  "analog-circuit-design": { date: "Spring 2026", context: "EECE 2413 · Labs 1–5", platform: "Breadboarding · PSpice", overview: "Five electronics labs connect design calculations, circuit construction, simulation, and measurement across amplifiers and semiconductor devices.", facts: [["5 reports", "Electronics investigations"], ["≈20", "BJT target gain"], ["8–12 V", "Supply investigation"], ["PSpice", "Simulation comparison"]], flow: ["Calculate & design", "Simulate", "Build & measure", "Compare & refine"] },
+};
 export function generateStaticParams() { return projects.map(({ slug }) => ({ slug })); }
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const project = projects.find(project => project.slug === slug);
-  return { title: project ? `${project.title} | Justin Ho` : "Project not found | Justin Ho", description: project?.summary };
-}
+export async function generateMetadata({ params }: Props): Promise<Metadata> { const {slug}=await params; const project=projects.find(item=>item.slug===slug); return { title:project ? `${project.title} | Justin Ho` : "Project not found | Justin Ho", description:project?.summary }; }
+
 export default async function ProjectPage({ params }: Props) {
-  const { slug } = await params;
-  const project = projects.find(project => project.slug === slug);
-  if (!project) notFound();
-  const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  return <main className="case-study">
-    <div className="page-shell">
-      <Link href="/projects" className="text-link text-link--light">← All projects</Link>
-      <div className="project-page-heading"><p className="section-kicker section-kicker--purple">{project.category}</p><h1>{project.title}</h1><p>{project.summary}</p><div className="tag-row">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
-      <figure className="case-study__scene"><Image src={project.image} alt={project.alt} width={1536} height={1024} sizes="(max-width: 1200px) 95vw, 1180px" /><figcaption>{project.slug === "analog-circuit-design" ? <><span>Original PSpice AC sweep from the Lab 4 report (simulation). </span><a href={project.image} target="_blank" rel="noreferrer">Open full-size plot ↗</a></> : "Illustrative project scene."}</figcaption></figure>
-      {project.slug === "riscv-processor" ? <ProcessorStudy /> : project.slug === "hexapod-robot" ? <HexapodStudy /> : project.slug === "ecg-signal-conditioning" ? <EcgStudy /> : <><div className="case-study__body"><aside><p className="section-kicker section-kicker--purple">Project overview</p><p>{project.category}</p></aside>
-        <div>{project.slug === "analog-circuit-design" && <figure className="case-study__diagram analog-schematic"><a href="/projects/analog/amplifier-schematic.png" target="_blank" rel="noreferrer"><Image src="/projects/analog/amplifier-schematic.png" alt="Original hand-drawn BJT amplifier design with bias network, split emitter resistor, and bypass capacitor" width={350} height={357} /></a><figcaption>Original amplifier design from Lab 4. <a href="/projects/analog/amplifier-schematic.png" target="_blank" rel="noreferrer">Open full size ↗</a></figcaption></figure>}{project.sections.map(section => <section className="case-study__section" key={section.title}><h2>{section.title}</h2><p>{section.text}</p></section>)}
-        {project.slug === "riscv-processor" && <figure className="case-study__diagram"><a href="/riscv-datapath.png" target="_blank" rel="noreferrer" aria-label="Open full-size processor datapath in a new tab"><Image src="/riscv-datapath.png" alt="Original processor datapath showing memory, registers, instruction decoding, ALU, and control connections" width={1200} height={900} sizes="(max-width: 760px) 90vw, 800px" /></a><figcaption><a href="/riscv-datapath.png" target="_blank" rel="noreferrer">Open original datapath at full size ↗</a></figcaption></figure>}
-        </div>
-      </div>
-      <section className="content-panel case-study__draft"><h2>More about this project</h2><div className="content-grid"><div><h3>My contribution</h3><p className="content-placeholder">To add: individual responsibilities and team context.</p></div><div><h3>Challenges and decisions</h3><p className="content-placeholder">To add: technical challenges, tradeoffs, and design decisions.</p></div><div><h3>Results and lessons</h3><p className="content-placeholder">To add: verified results, testing, and lessons learned.</p></div><div><h3>Project resources</h3><p className="content-placeholder">To add: repository, report, demonstration, and supporting screenshots.</p></div></div></section></>}<nav className="case-study__next" aria-label="Project navigation"><Link href="/projects">All projects</Link><Link href={`/projects/${next.slug}`}>Next: {next.title} →</Link></nav>
+  const {slug}=await params;
+  const project=projects.find(item=>item.slug===slug);
+  if(!project) notFound();
+  const record=records[slug];
+  const index=projects.indexOf(project);
+  const previous=projects[(index+projects.length-1)%projects.length];
+  const next=projects[(index+1)%projects.length];
+  const analog=slug==="analog-circuit-design";
+  return <main className={styles.page}>
+    <section className={styles.hero}><div className={`page-shell ${styles.heroGrid}`}><div className={styles.heroCopy}><Link href="/projects" className={styles.back}>← All projects</Link><p className={styles.label}>{project.category}</p><h1>{project.title}</h1><p>{project.summary}</p><div className={styles.tags}>{project.tags.map(tag=><span key={tag}>{tag}</span>)}</div><div className={styles.actions}><a href="#project-overview" className="button button--primary">Explore the project ↓</a><Link href="/projects" className="button button--secondary">All projects →</Link></div></div><figure className={`${styles.heroImage} ${analog ? styles.plot : ""}`}><Image src={project.image} alt={project.alt} width={1536} height={1024} sizes="(max-width: 850px) 100vw, 55vw" preload /><figcaption>{analog ? "Original PSpice simulation · Lab 4" : "Illustrative project scene"}</figcaption></figure><aside className={styles.record}><div><span>Project record</span><strong>{record.date}</strong></div><div><span>Context</span><strong>{record.context}</strong></div><div><span>Platform & tools</span><strong>{record.platform}</strong></div></aside></div></section>
+    <section id="project-overview" className={styles.overview}><div className={`page-shell ${styles.overviewGrid}`}><div><p className={styles.label}>01 / Overview</p><h2>Project at a glance.</h2><p>{record.overview}</p></div><div className={styles.facts}>{record.facts.map(([value,label])=><div key={label}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><path d="M7 7h10v10H7zM3 8h4m-4 4h4m-4 4h4m10-8h4m-4 4h4m-4 4h4M8 3v4m4-4v4m4-4v4M8 17v4m4-4v4m4-4v4" /></svg><strong>{value}</strong><span>{label}</span></div>)}</div></div></section>
+    <section className={styles.system}><div className={`page-shell ${styles.systemGrid}`}><div><p className={styles.label}>02 / System approach</p><h2>{analog ? "From design to measurement." : "How the pieces connect."}</h2><p>{analog ? "A repeatable investigation process connects each design to its simulated and measured behavior." : "A simplified view of the functional path. Original artifacts and detailed evidence follow below."}</p></div><ol className={styles.flow}>{record.flow.map((step,i)=><li key={step}><span>0{i+1}</span><strong>{step}</strong></li>)}</ol></div></section>
+    <div className={`page-shell ${styles.body}`}>
+      {slug==="riscv-processor" ? <ProcessorStudy /> : slug==="hexapod-robot" ? <HexapodStudy /> : slug==="ecg-signal-conditioning" ? <EcgStudy /> : <div className={styles.analogBody}>
+        <nav className="study-outline" aria-label="Case study sections"><a href="#analog-investigations">Investigations</a><a href="#analog-artifacts">Original artifacts</a><a href="#analog-reflection">Further details</a></nav>
+        <section id="analog-investigations" className="case-study__section"><h2>Electronics from theory to measurement</h2><p>{project.sections[0].text}</p><div className={styles.investigations}>{project.sections.slice(1,5).map(section=><article key={section.title}><h3>{section.title}</h3><p>{section.text}</p></article>)}</div></section>
+        <section id="analog-artifacts" className="case-study__section"><h2>Original design and simulation</h2><p>These figures come from the Lab 4 report. The frequency-response plot is a simulation result.</p><div className={styles.artifactPair}><figure className="case-study__diagram"><a href="/projects/analog/amplifier-schematic.png" target="_blank" rel="noreferrer"><Image src="/projects/analog/amplifier-schematic.png" alt="Original hand-drawn BJT amplifier schematic with bias network, split emitter resistor, and bypass capacitor" width={350} height={357} sizes="(max-width: 700px) 90vw, 400px" /></a><figcaption>Original amplifier schematic · <a href="/projects/analog/amplifier-schematic.png" target="_blank" rel="noreferrer">Open full size ↗</a></figcaption></figure><figure className="case-study__diagram"><a href={project.image} target="_blank" rel="noreferrer"><Image src={project.image} alt={project.alt} width={1536} height={1024} sizes="(max-width: 700px) 90vw, 600px" /></a><figcaption>PSpice AC sweep · <a href={project.image} target="_blank" rel="noreferrer">Open full size ↗</a></figcaption></figure></div></section>
+        <section id="analog-reflection" className="case-study__section"><h2>Design tradeoffs and further details</h2><p>{project.sections[5].text}</p><div className="content-grid"><div className="content-panel"><h3>Individual contribution</h3><p className="content-placeholder">To add: individual responsibilities and team context.</p></div><div className="content-panel"><h3>Challenges and decisions</h3><p className="content-placeholder">To add: personal debugging examples and design decisions.</p></div><div className="content-panel"><h3>Further reflection</h3><p className="content-placeholder">To add: personal lessons and improvements for a future design.</p></div><div className="content-panel"><h3>Project resources</h3><p className="content-placeholder">To add: public repository, report, and demonstration links.</p></div></div><h3>Source material</h3><p>{project.sections[6].text}</p></section>
+      </div>}
     </div>
+    <nav className={styles.navigation} aria-label="Project navigation"><div className="page-shell"><Link href={`/projects/${previous.slug}`}><span>← Previous project</span><strong>{previous.title}</strong></Link><Link href="/projects" className={styles.allProjects}>All projects</Link><Link href={`/projects/${next.slug}`}><span>Next project →</span><strong>{next.title}</strong></Link></div></nav>
   </main>;
 }
-
-
-
-
-
-
-

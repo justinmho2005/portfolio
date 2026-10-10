@@ -1,0 +1,47 @@
+.page { background:var(--bg-primary); }
+.page h1,.page h2,.page h3 { font-weight:700; }
+.page h2 { font-size:clamp(1.9rem,3.5vw,2.8rem); line-height:1.1; letter-spacing:-.04em; margin:12px 0 18px; }
+.page p { line-height:1.6; }
+.label { color:var(--lavender); text-transform:uppercase; font-size:.65rem; font-weight:600; letter-spacing:.28em; margin:0; }
+.hero { padding:62px 0 55px; background:linear-gradient(90deg,rgba(20,15,28,.88),rgba(20,15,28,.08)),url('/hero-white-mountains.png') center 48%/cover; }
+.hero h1 { font-size:clamp(3rem,6vw,5.2rem); line-height:.98; letter-spacing:-.045em; margin:16px 0 24px; }
+.hero h1 span { color:var(--lavender); }
+.lead { max-width:490px; font-size:1.06rem; margin:0; }
+.connect { padding:42px 0 35px; background:radial-gradient(ellipse at 95% 15%,rgba(139,92,246,.09),transparent 50%); }
+.intro { max-width:620px; color:var(--text-secondary); font-size:.95rem; margin:0 0 28px; }
+.channels { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.channel { display:flex; flex-direction:column; align-items:center; text-align:center; border:1px solid rgba(185,160,255,.3); border-radius:8px; padding:28px 24px 20px; background:linear-gradient(140deg,rgba(139,92,246,.04),transparent); }
+.channelIcon { width:58px; height:58px; color:var(--violet); margin-bottom:17px; }
+.channel h3 { font-size:1.4rem; margin:0 0 8px; letter-spacing:-.025em; }
+.channel p { max-width:220px; color:var(--text-secondary); font-size:.9rem; margin:0 0 24px; }
+.primary,.outline { display:flex; align-items:center; justify-content:center; gap:16px; min-height:46px; padding:12px 20px; border-radius:6px; font:inherit; font-size:.82rem; font-weight:600; }
+.primary { border:1px solid var(--violet); background:var(--violet); color:white; }
+.outline { border:1px solid rgba(185,160,255,.55); background:transparent; color:var(--white); }
+.channel button { width:100%; margin-top:auto; }
+.page button:disabled { cursor:default; opacity:.65; }
+.resume { margin-top:22px; display:flex; align-items:center; gap:24px; padding:24px 28px; border:1px solid rgba(185,160,255,.3); border-radius:8px; background:rgba(139,92,246,.035); }
+.resume>svg { width:44px; height:48px; color:var(--violet); flex-shrink:0; }
+.resume>div { flex:1; }
+.resume h3 { font-size:1.2rem; margin:0 0 6px; }
+.resume p { color:var(--text-secondary); font-size:.83rem; max-width:520px; margin:0; }
+.resume button { flex-shrink:0; }
+.opportunities { margin-top:38px; }
+.opportunities h2 { font-size:clamp(1.65rem,2.8vw,2.2rem); }
+.opportunityGrid { display:grid; grid-template-columns:repeat(3,1fr); margin-top:26px; gap:26px; }
+.opportunityGrid article { display:flex; align-items:flex-start; gap:16px; border-right:1px solid rgba(185,160,255,.16); padding-right:24px; }
+.opportunityGrid article:last-child { border:0; padding-right:0; }
+.opportunityGrid svg { width:34px; height:34px; color:var(--violet); flex-shrink:0; }
+.opportunityGrid h3 { font-size:.95rem; line-height:1.3; margin:0 0 9px; }
+.opportunityGrid p { font-size:.83rem; color:var(--text-secondary); margin:0; }
+.scene { position:relative; margin:0; height:clamp(270px,32vw,460px); }
+.scene img { object-fit:cover; object-position:center 65%; }
+.scene figcaption { position:absolute; bottom:0; right:0; padding:6px 18px; background:rgba(20,15,28,.65); font-size:.6rem; color:#fff; }
+.closing { padding:40px 0 45px; background:linear-gradient(90deg,rgba(20,15,28,.98),rgba(20,15,28,.8)),url('/hero-white-mountains.png') center 60%/cover; }
+.closingGrid { display:grid; grid-template-columns:1.2fr 1fr; gap:65px; align-items:center; }
+.closingGrid>div>p:not(.label) { max-width:540px; color:var(--text-secondary); font-size:.9rem; }
+.explore { display:inline-block; color:var(--lavender); font-size:.85rem; margin-top:10px; }
+.thought { border-left:1px solid rgba(185,160,255,.2); padding-left:35px; display:flex; gap:18px; align-items:flex-start; }
+.thought>span { color:var(--violet); font:3.8rem Georgia,serif; line-height:1; }
+.thought p { font-style:italic; max-width:310px!important; }
+@media(max-width:900px) { .channel { padding:24px 16px 18px; } .opportunityGrid { gap:18px; } .opportunityGrid article { flex-direction:column; padding-right:18px; } .closingGrid { gap:30px; } }
+@media(max-width:650px) { .hero { padding:45px 0; background-position:60% center; } .hero h1 { font-size:3.5rem; } .lead { font-size:.95rem; } .connect { padding-top:30px; } .channels { grid-template-columns:1fr; gap:16px; } .channel { padding:25px 22px 22px; } .channelIcon { width:48px; height:48px; margin-bottom:12px; } .channel p { max-width:none; } .resume { flex-wrap:wrap; padding:22px; gap:16px; } .resume>div { flex-basis:calc(100% - 65px); } .resume button { width:100%; } .opportunityGrid { grid-template-columns:1fr; gap:22px; } .opportunityGrid article { flex-direction:row; border-right:0; border-bottom:1px solid rgba(185,160,255,.14); padding:0 0 22px; } .opportunityGrid article:last-child { padding-bottom:0; } .scene { height:280px; } .scene img { object-position:45% center; } .closingGrid { grid-template-columns:1fr; gap:20px; } .thought { padding-left:20px; } }

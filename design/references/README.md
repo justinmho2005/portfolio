@@ -39,3 +39,20 @@ Boston prompt: Photorealistic panoramic editorial photograph of the recognizable
 Campus prompt: Photorealistic architectural editorial photograph of a contemporary Boston university campus in autumn: curved glass academic building, pale stone facade, pedestrian plaza, maple trees with red and gold leaves, soft afternoon sunlight. Landscape 3:2. No signage, text, logos, people, seals or invented university names. Conceptual university atmosphere, not a claim to depict a specific actual building. Warm orange and muted purple-blue palette.
 
 Validation: lint and production build passed. Desktop and 390px mobile views checked; no horizontal overflow observed. Project and experience links point to existing portfolio routes.
+
+## Contact implementation
+First design pass completed October 10, 2026: mountain hero, three icon-based contact cards, wide resume bar, opportunity columns, full-width outdoor workspace scene, and scenic final-thoughts section. Purple theme retained. Email, LinkedIn, GitHub, and resume controls remain explicitly pending and disabled until real destinations are provided. Project and Home links work.
+
+Built-in image tool asset: public/contact-workspace-v1.png. Prompt: Photorealistic editorial outdoor engineering workspace at an autumn mountain overlook at sunset. Wide landscape photograph: open laptop displaying a dark code editor on a rocky ledge on the left, small FPGA development board near center, matte black water bottle on right, backpack partly visible at far left. Layered mountains and a lake in the background, warm orange sunset with violet and deep blue shadows. Realistic premium photography, no people, no logos, no readable text, no typography. Wide composition intended as a full-width website scenic divider, objects concentrated in lower half, no UI or page design.
+
+Validation: lint and production build passed. Desktop and 390px mobile views checked. No horizontal overflow observed; four pending contact/resume controls are disabled.
+
+## Resume implementation
+First design pass completed October 10, 2026 at /resume. Added the route to Home and shared page navigation with active-page styling. Skyline hero, background summary, pending PDF download, two co-op cards, education preview, five technical skill groups, three featured projects, and scenic contact call to action follow the supplied Resume mockup in the approved purple palette. Existing approved imagery is reused; no new generated images. PDF, contact profiles, and graduation details remain placeholders.
+
+Validation: lint and production build passed; /resume is statically generated. Desktop and 390px mobile layout and active navigation checked, with no horizontal overflow observed. Remaining design work: project case-study layouts and Home refinements.
+
+## Case-study implementation
+Shared design pass completed October 10, 2026 for all four project routes. Added scenic image-led heroes, project date/context/platform records, four summary facts, functional flow graphics, numbered technical sections, compact process cards, clearer result tables, framed original artifacts, and previous/all/next navigation. Analog investigations now use compact cards and paired schematic/simulation figures. Existing report-backed text, source distinctions, and missing-evidence placeholders are preserved. No new generated imagery.
+
+Validation: lint and production build passed for all four routes. ECG desktop process layout and section navigation reviewed; analog, robotics, and processor mobile widths checked with no horizontal overflow. Three original robotics figures and the processor datapath remain present. Section offsets account for sticky navigation. Home visual refinements remain the next major design task.
