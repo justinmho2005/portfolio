@@ -20,11 +20,11 @@ function Mark({ kind }: { kind: "chip" | "tools" | "chart" | "people" | "message
 
 const roles = [
   { id: "fresenius", year: "2026", context: "Embedded software & verification", outcome: "Work centers on maintainable software and scalable verification. Specific delivered milestones and results will be added here." },
-  { id: "charles-river", year: "2025", context: "Distributed systems & software delivery", outcome: "Work supported reproducible environments and release reliability. Specific delivered milestones and results will be added here." },
+  { id: "charles-river", year: "2025", context: "Java development environments & API integration", outcome: "Contributed to a new dev-container project and helped define future goals and next steps. Development is ongoing." },
 ];
 
 export default function Page() {
-  return <><SectionHeader active="Experience" /><main className="journey-page">
+  return <><SectionHeader active="Experience" /><main id="main-content" tabIndex={-1} className="journey-page">
     <section className="journey-hero">
       <div className="page-shell"><p className="section-kicker">Experience</p><h1>Engineering in the <span>real world.</span></h1><p>Two co-op experiences connecting technical depth with practical engineering, teamwork, and systems that matter.</p><a href="#fresenius" className="journey-down" aria-label="Explore co-op experience">↓</a></div>
     </section>
@@ -38,8 +38,13 @@ export default function Page() {
         <div id={`${role.id}-focus`} className="journey-focus">
           <section><Mark kind="chip" /><div><h3>Key responsibilities</h3><ul>{job.focus.map(item => <li key={item}>{item}</li>)}</ul></div></section>
           <section><Mark kind="tools" /><div><h3>Technologies & focus</h3><p className="journey-context">{role.context}</p><div className="tag-row">{job.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></section>
-          <section><Mark kind="chart" /><div><h3>Impact & results</h3><p>{role.outcome}</p><span className="journey-pending">Detailed outcomes to add</span></div></section>
+          <section><Mark kind="chart" /><div><h3>{job.story ? "Progress & next steps" : "Impact & results"}</h3><p>{role.outcome}</p>{!job.story && <span className="journey-pending">Detailed outcomes to add</span>}</div></section>
         </div>
+        {job.story && <div className="journey-story">
+          <section><p className="section-kicker">Challenge & approach</p><h3>A connected development environment</h3><p>{job.story.challenge}</p></section>
+          <section><p className="section-kicker">Verification</p><h3>Checking the integration</h3><p>{job.story.testing}</p></section>
+          <section><p className="section-kicker">What I learned</p><h3>Working inside a larger software system</h3><p>{job.story.learning}</p></section>
+        </div>}
       </article>;
     })}</div>
     <section className="journey-timeline-section"><div className="page-shell"><div className="journey-section-heading"><div><p className="section-kicker">03 / Timeline</p><h2>My professional journey.</h2><p>From software delivery to embedded verification.</p></div><p>Each experience adds a new perspective on how software is built, tested, and maintained in practice.</p></div><ol className="journey-timeline"><li><span className="journey-time">2025</span><div><h3>Charles River Development</h3><p>Software Engineer Co-op</p><span>Jan 2025 – Jun 2025</span></div></li><li><span className="journey-time">2026</span><div><h3>Fresenius Medical Care</h3><p>Embedded Software Engineering Co-op</p><span>Jul 2026 – Present</span></div></li><li className="journey-future"><span className="journey-time">Future</span><div><h3>What comes next</h3><p>New challenges. More systems to build.</p><Link href="/contact">Let’s connect →</Link></div></li></ol></div></section>
@@ -47,3 +52,4 @@ export default function Page() {
     <section className="journey-cta"><div className="page-shell"><div><p className="section-kicker">05 / Next step</p><h2>Let’s build what’s next.</h2><p>Interested in my experience or want to talk about engineering?</p></div><div className="hero__actions"><Link href="/contact" className="button button--primary">Get in touch →</Link><Link href="/projects" className="button button--secondary">Explore projects →</Link></div></div></section>
   </main><footer className="footer"><div className="page-shell footer__inner"><p>© 2026 Justin Ho</p><Link href="/#top">Back to Home ↑</Link></div></footer></>;
 }
+

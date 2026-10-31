@@ -26,7 +26,7 @@ const channels: { title: string; icon: IconKind; description: string; action: st
   { title: "GitHub", icon: "github", description: "Explore my projects, experiments, and code.", action: "Profile link to add" },
 ];
 export default function Page() {
-  return <><SectionHeader active="Contact" /><main className={styles.page}>
+  return <><SectionHeader active="Contact" /><main id="main-content" tabIndex={-1} className={styles.page}>
     <section className={styles.hero}><div className="page-shell"><p className={styles.label}>Contact</p><h1>Let’s build<br /><span>something.</span></h1><p className={styles.lead}>Whether you’re interested in my work, have an engineering opportunity, or just want to connect, I’d love to hear from you.</p></div></section>
     <section className={styles.connect}><div className="page-shell"><p className={styles.label}>01 / Connect</p><h2>Reach out directly.</h2><p className={styles.intro}>I’m always open to conversations about engineering, technology, and interesting problems. My contact links will live here.</p><div className={styles.channels}>{channels.map((channel, index) => <article className={styles.channel} key={channel.title}><div className={styles.channelIcon}><Icon kind={channel.icon} /></div><h3>{channel.title}</h3><p>{channel.description}</p><button className={index === 0 ? styles.primary : styles.outline} type="button" disabled>{channel.action}<span aria-hidden="true">→</span></button></article>)}</div>
     <div className={styles.resume}><Icon kind="file" /><div><h3>Résumé</h3><p>A concise overview of my education, experience, projects, and technical skills.</p></div><button className={styles.outline} type="button" disabled>Résumé to add <span aria-hidden="true">↓</span></button></div>
@@ -35,3 +35,4 @@ export default function Page() {
     <section className={styles.closing}><div className={`page-shell ${styles.closingGrid}`}><div><p className={styles.label}>03 / Final thoughts</p><h2>Thanks for stopping by.</h2><p>I’m excited to meet new people, learn about interesting work, and be part of building what’s next.</p><Link href="/projects" className={styles.explore}>Explore my work →</Link></div><div className={styles.thought}><span aria-hidden="true">“</span><p>Good ideas, great people, and real-world problems—that’s where I want to be.</p></div></div></section>
   </main><footer className="footer"><div className="page-shell footer__inner"><p>© 2026 Justin Ho</p><Link href="/#top">Back to Home ↑</Link></div></footer></>;
 }
+

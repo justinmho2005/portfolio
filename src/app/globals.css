@@ -2405,7 +2405,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--lavender); outl
 
 /* Experience: approved Engineering Journey reference, adapted to purple. */
 .journey-page { background: var(--bg-primary); }
-.journey-hero { background: linear-gradient(0deg,rgba(20,15,28,.88),rgba(20,15,28,.12)),url('/hero-white-mountains.png') center 45%/cover; text-align:center; padding:100px 0 42px; }
+.journey-hero { background: linear-gradient(0deg,rgba(20,15,28,.88),rgba(20,15,28,.12)),url('/hero-white-mountains.webp') center 45%/cover; text-align:center; padding:100px 0 42px; }
 .journey-hero h1 { font-size:clamp(2.4rem,4.5vw,4rem); line-height:1.08; letter-spacing:-.045em; margin:14px 0 20px; }
 .journey-hero h1 span { color:var(--lavender); }
 .journey-hero p:not(.section-kicker) { max-width:650px; margin:0 auto; color:var(--white); line-height:1.65; }
@@ -2466,10 +2466,39 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--lavender); outl
 .journey-values { display:grid; grid-template-columns:repeat(4,1fr); margin-top:24px; gap:14px; }
 .journey-values h3 { font-size:.78rem; margin:10px 0 5px; }
 .journey-values p { font-size:.7rem; line-height:1.5; margin:0; }
-.journey-cta { padding:48px 0; background:linear-gradient(90deg,rgba(20,15,28,.95),rgba(20,15,28,.65)),url('/hero-white-mountains.png') center 65%/cover; }
+.journey-cta { padding:48px 0; background:linear-gradient(90deg,rgba(20,15,28,.95),rgba(20,15,28,.65)),url('/hero-white-mountains.webp') center 65%/cover; }
 .journey-cta>.page-shell { display:flex; align-items:center; justify-content:space-between; gap:30px; }
 .journey-cta .hero__actions { flex-shrink:0; }
 @media(max-width:1000px) { .journey-focus>section { padding:0 12px; gap:9px; } .journey-focus .journey-icon { width:24px; } .journey-beyond-grid { grid-template-columns:1fr; } .journey-beyond figure { display:none; } .journey-cta>.page-shell { align-items:flex-start; flex-direction:column; } }
 @media(max-width:760px) { .journey-hero { padding:65px 0 20px; } .journey-overview { grid-template-columns:1fr; } .journey-photo { min-height:250px; } .journey-role-copy { padding:24px; } .journey-focus { grid-template-columns:1fr; gap:24px; } .journey-focus>section { border:0; padding:0 8px; } .journey-focus>section:first-child { padding-left:8px; } .journey-section-heading { grid-template-columns:1fr; gap:5px; } .journey-section-heading>p { border:0; padding:0; } .journey-timeline { grid-template-columns:1fr; padding:0 0 0 25px; gap:22px; } .journey-timeline li { text-align:left; padding-left:15px; } .journey-time { padding:0 0 10px; } .journey-timeline li:before { left:-14px; top:0; bottom:-22px; right:auto; width:1px; height:auto; } .journey-timeline li:last-child:before { bottom:0; } .journey-timeline li:after { left:-21px; top:3px; } .journey-timeline li>div { min-height:0; } .journey-values { grid-template-columns:repeat(2,1fr); gap:24px; } .journey-cta .hero__actions { flex-wrap:wrap; } .journey-role,.journey-focus { scroll-margin-top:165px; } }
 
 .journey-page h1,.journey-page h2,.journey-page h3 { font-weight:700; }
+
+/* Shared finishing details. The Home hero and laptop replica retain their baseline. */
+.skip-link { position:fixed; top:10px; left:12px; z-index:10000; transform:translateY(-160%); background:var(--warm-white); color:var(--ink); border:2px solid var(--violet); border-radius:6px; padding:12px 18px; font-size:.9rem; font-weight:600; }
+.skip-link:focus { transform:translateY(0); }
+main:focus { outline:none; }
+main:not(.site-content) .button,
+.site-content > section:not(.hero) .button { border-radius:6px; min-height:44px; }
+@media(min-width:761px) and (max-width:1000px) { .nav { gap:1.1rem; } .nav a { font-size:.86rem; } }
+@media(max-width:760px) {
+  .site-header__inner { gap:6px; padding-top:10px; padding-bottom:10px; }
+  .site-header .brand { font-size:1.4rem; }
+  .site-header .nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); width:100%; gap:0 12px; }
+  .site-header .nav a { min-height:44px; display:flex; align-items:center; font-size:.82rem; }
+  .intro-home-replica .nav { display:flex; width:auto; }
+  .intro-home-replica .nav a { min-height:0; }
+}
+@media(prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  .button { transition:none; }
+  .button:hover { transform:none; }
+}
+
+html.intro-active .skip-link, html.intro-settling .skip-link { visibility:hidden; }
+main#main-content { scroll-margin-top:88px; }
+@media(max-width:760px) { main#main-content { scroll-margin-top:165px; } }
+.journey-story { display:grid; grid-template-columns:1.2fr .85fr 1.15fr; gap:22px; margin-top:22px; padding:24px; border:1px solid rgba(185,160,255,.18); border-radius:7px; background:rgba(139,92,246,.035); }
+.journey-story h3 { font-size:1rem; font-weight:700; line-height:1.25; margin:10px 0 12px; }
+.journey-story p:not(.section-kicker) { font-size:.83rem; line-height:1.65; color:var(--text-secondary); margin:0; }
+@media(max-width:900px) { .journey-story { grid-template-columns:1fr; gap:25px; } }

@@ -55,7 +55,7 @@
 .headingRow h2 { margin-bottom:0; }
 .headingRow>p { color:var(--text-secondary); font-size:.8rem; }
 .headingRow>a { color:var(--lavender); font-size:.8rem; flex-shrink:0; }
-.courseGrid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.courseGrid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
 .courseCard,.projectCard { display:flex; flex-direction:column; border:1px solid rgba(185,160,255,.2); border-radius:7px; overflow:hidden; background:rgba(139,92,246,.035); transition:border-color .2s,transform .2s; }
 .courseCard:hover,.projectCard:hover { border-color:var(--lavender); transform:translateY(-3px); }
 .courseImage,.projectImage { position:relative; height:135px; background:var(--bg-secondary); }
@@ -73,7 +73,7 @@
 .projectCard .cardBody h3 { font-size:.88rem; }
 .projectCard .cardBody>p { font-size:.73rem; }
 .projectCard .cardLink { margin-top:auto; padding-top:8px; }
-.beyond { position:relative; isolation:isolate; padding:38px 0 42px; background:linear-gradient(90deg,rgba(20,15,28,.95),rgba(20,15,28,.78)),url('/education-boston-v1.png') center 60%/cover; }
+.beyond { position:relative; isolation:isolate; padding:38px 0 42px; background:linear-gradient(90deg,rgba(20,15,28,.95),rgba(20,15,28,.78)),url('/education-boston-v1.webp') center 60%/cover; }
 .beyondGrid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:28px; margin-top:22px; }
 .beyondGrid>div>p { font-size:.8rem; color:var(--text-secondary); margin-top:0; }
 .beyondFeature svg { width:30px; color:var(--lavender); }
@@ -84,4 +84,5 @@
 @media(max-width:800px) { .heroInner { flex-direction:column; align-items:flex-start; gap:25px; } .universityName { font-size:1.25rem; } .universityName svg { width:37px; } .universityGrid { grid-template-columns:1fr; gap:0; } .campus { height:280px; margin-bottom:24px; } .degreeGrid { grid-template-columns:1fr; } .note { max-width:none; } .progression { grid-template-columns:repeat(2,1fr); gap:16px; } .progressionTitle { flex-direction:row; } .progression>li:not(:last-child):after { content:none; } .progression>li:last-child { grid-column:1/-1; } .courseGrid { grid-template-columns:1fr; } .courseImage { height:200px; } .beyondGrid { grid-template-columns:repeat(3,1fr); gap:20px; } .beyondGrid>div:first-child { grid-column:1/-1; } .headingRow { align-items:flex-start; flex-direction:column; gap:5px; } }
 @media(max-width:500px) { .hero h1 { font-size:2.65rem; } .heroInner { padding-top:38px; } .hero p:not(.label) { font-size:.9rem; } .highlights { gap:12px; } .highlights>div { padding-right:10px; } .highlights svg { width:24px; } .highlights span { font-size:.64rem; } .degreeFacts { flex-direction:column; gap:18px; } .projectGrid { grid-template-columns:1fr; } .projectImage { height:170px; } .beyondGrid { grid-template-columns:1fr; } .beyondGrid>div:first-child { grid-column:auto; } .beyondFeature { padding-top:15px; border-top:1px solid var(--border-dark); } .beyondFeature p { margin-bottom:7px; } }
 @media(prefers-reduced-motion:reduce) { .courseCard,.projectCard { transition:none; } .courseCard:hover,.projectCard:hover { transform:none; } }
+
 

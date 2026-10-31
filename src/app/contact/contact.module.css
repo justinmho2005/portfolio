@@ -3,7 +3,7 @@
 .page h2 { font-size:clamp(1.9rem,3.5vw,2.8rem); line-height:1.1; letter-spacing:-.04em; margin:12px 0 18px; }
 .page p { line-height:1.6; }
 .label { color:var(--lavender); text-transform:uppercase; font-size:.65rem; font-weight:600; letter-spacing:.28em; margin:0; }
-.hero { padding:62px 0 55px; background:linear-gradient(90deg,rgba(20,15,28,.88),rgba(20,15,28,.08)),url('/hero-white-mountains.png') center 48%/cover; }
+.hero { padding:62px 0 55px; background:linear-gradient(90deg,rgba(20,15,28,.88),rgba(20,15,28,.08)),url('/hero-white-mountains.webp') center 48%/cover; }
 .hero h1 { font-size:clamp(3rem,6vw,5.2rem); line-height:.98; letter-spacing:-.045em; margin:16px 0 24px; }
 .hero h1 span { color:var(--lavender); }
 .lead { max-width:490px; font-size:1.06rem; margin:0; }
@@ -36,7 +36,7 @@
 .scene { position:relative; margin:0; height:clamp(270px,32vw,460px); }
 .scene img { object-fit:cover; object-position:center 65%; }
 .scene figcaption { position:absolute; bottom:0; right:0; padding:6px 18px; background:rgba(20,15,28,.65); font-size:.6rem; color:#fff; }
-.closing { padding:40px 0 45px; background:linear-gradient(90deg,rgba(20,15,28,.98),rgba(20,15,28,.8)),url('/hero-white-mountains.png') center 60%/cover; }
+.closing { padding:40px 0 45px; background:linear-gradient(90deg,rgba(20,15,28,.98),rgba(20,15,28,.8)),url('/hero-white-mountains.webp') center 60%/cover; }
 .closingGrid { display:grid; grid-template-columns:1.2fr 1fr; gap:65px; align-items:center; }
 .closingGrid>div>p:not(.label) { max-width:540px; color:var(--text-secondary); font-size:.9rem; }
 .explore { display:inline-block; color:var(--lavender); font-size:.85rem; margin-top:10px; }
@@ -45,3 +45,4 @@
 .thought p { font-style:italic; max-width:310px!important; }
 @media(max-width:900px) { .channel { padding:24px 16px 18px; } .opportunityGrid { gap:18px; } .opportunityGrid article { flex-direction:column; padding-right:18px; } .closingGrid { gap:30px; } }
 @media(max-width:650px) { .hero { padding:45px 0; background-position:60% center; } .hero h1 { font-size:3.5rem; } .lead { font-size:.95rem; } .connect { padding-top:30px; } .channels { grid-template-columns:1fr; gap:16px; } .channel { padding:25px 22px 22px; } .channelIcon { width:48px; height:48px; margin-bottom:12px; } .channel p { max-width:none; } .resume { flex-wrap:wrap; padding:22px; gap:16px; } .resume>div { flex-basis:calc(100% - 65px); } .resume button { width:100%; } .opportunityGrid { grid-template-columns:1fr; gap:22px; } .opportunityGrid article { flex-direction:row; border-right:0; border-bottom:1px solid rgba(185,160,255,.14); padding:0 0 22px; } .opportunityGrid article:last-child { padding-bottom:0; } .scene { height:280px; } .scene img { object-position:45% center; } .closingGrid { grid-template-columns:1fr; gap:20px; } .thought { padding-left:20px; } }
+

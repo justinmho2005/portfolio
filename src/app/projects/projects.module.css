@@ -1,7 +1,7 @@
 .page { background:var(--bg-primary); }
 .page h1,.page h2,.page h3 { font-weight:700; }
 .label { font-size:.65rem; text-transform:uppercase; letter-spacing:.27em; color:var(--lavender); font-weight:600; margin:0; }
-.hero { padding:45px 0 38px; background:linear-gradient(90deg,rgba(20,15,28,.9),rgba(20,15,28,.35)),url('/hero-white-mountains.png') center 48%/cover; }
+.hero { padding:45px 0 38px; background:linear-gradient(90deg,rgba(20,15,28,.9),rgba(20,15,28,.35)),url('/hero-white-mountains.webp') center 48%/cover; }
 .hero h1 { font-size:clamp(2.3rem,4vw,3.5rem); line-height:1.08; letter-spacing:-.04em; margin:14px 0 18px; }
 .hero h1 span { color:var(--lavender); }
 .hero p:not(.label) { max-width:620px; font-size:.95rem; line-height:1.6; margin:0; }
@@ -33,9 +33,10 @@
 .tags { display:flex; flex-wrap:wrap; gap:6px; margin:17px 0; }
 .tags span { padding:5px 8px; font-size:.64rem; border-radius:4px; background:rgba(185,160,255,.09); color:var(--lavender); }
 .analogCopy>a { color:var(--lavender); display:flex; justify-content:space-between; font-size:.83rem; font-weight:600; margin-top:20px; }
-.cta { padding:35px 0; background:linear-gradient(90deg,rgba(20,15,28,.95),rgba(20,15,28,.65)),url('/hero-white-mountains.png') center 65%/cover; }
+.cta { padding:35px 0; background:linear-gradient(90deg,rgba(20,15,28,.95),rgba(20,15,28,.65)),url('/hero-white-mountains.webp') center 65%/cover; }
 .ctaInner { display:flex; align-items:center; justify-content:space-between; gap:35px; }
 .cta p:not(.label) { font-size:.85rem; color:var(--text-secondary); line-height:1.6; }
 .actions { display:flex; flex-wrap:wrap; gap:12px; flex-shrink:0; }
 @media(max-width:1000px) { .grid { gap:15px; } .grid :global(.project-card__label) { font-size:.55rem; padding:12px; } .grid :global(.project-item__info) { padding:15px; } .grid :global(.project-item__info h3) { font-size:1.05rem; } .ctaInner { align-items:flex-start; flex-direction:column; gap:15px; } }
 @media(max-width:760px) { .grid { grid-template-columns:1fr; } .grid :global(.project-card__label) { font-size:.65rem; } .grid :global(.project-item__info) { padding:20px; } .grid :global(.project-item__info h3) { font-size:1.3rem; } .heading { flex-direction:column; align-items:flex-start; gap:12px; } .analog { grid-template-columns:1fr; } .plot { min-height:230px; } .analogCopy { padding:23px; } .hero { padding:35px 0; } }
+

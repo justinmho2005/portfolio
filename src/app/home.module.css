@@ -48,7 +48,7 @@
 .educationFeatures svg { width:25px; height:25px; }
 .educationFeatures h3 { font-size:.72rem; margin:0 0 4px; }
 .educationFeatures p { font-size:.65rem; line-height:1.45; margin:0; }
-.contact { padding:42px 0; background:linear-gradient(90deg,rgba(20,15,28,.87),rgba(20,15,28,.48)),url('/hero-white-mountains.png') center 60%/cover; }
+.contact { padding:42px 0; background:linear-gradient(90deg,rgba(20,15,28,.87),rgba(20,15,28,.48)),url('/hero-white-mountains.webp') center 60%/cover; }
 .contactGrid { display:grid; grid-template-columns:1fr 1.2fr; align-items:center; gap:45px; }
 .contactGrid>div>p:not(.label) { max-width:470px; color:var(--text-secondary); font-size:.85rem; line-height:1.6; }
 .contactLink { color:var(--lavender); font-size:.78rem; display:inline-block; margin-top:12px; }
@@ -62,3 +62,10 @@
 @media(max-width:1050px) { .skillsGrid { grid-template-columns:1fr 1fr; } .education { grid-template-columns:1fr 1fr; } .educationFeatures { grid-column:1/-1; border:0; padding:10px 0 0; grid-template-columns:repeat(4,1fr); } .job { grid-template-columns:1fr; } .jobImage { min-height:170px; } .contactGrid { grid-template-columns:1fr; gap:25px; } .contactCards { max-width:700px; } }
 @media(max-width:750px) { .about { grid-template-columns:1fr; gap:28px; } .values { padding:25px 0 0; border-left:0; border-top:1px solid rgba(80,45,120,.17); } .heading { align-items:flex-start; flex-direction:column; gap:15px; } .heading>p { margin:0; } .education { grid-template-columns:1fr; gap:25px; } .educationFeatures { grid-column:auto; grid-template-columns:1fr 1fr; } .city img { height:220px; } }
 @media(max-width:500px) { .light { padding:30px 0; } .jobs { grid-template-columns:1fr; } .jobImage { min-height:200px; } .skillsGrid { grid-template-columns:1fr; } .values { gap:22px 15px; } .values article { flex-direction:column; gap:10px; } .contactCards { gap:8px; } .contactCards>a { padding:18px 6px; } .contactCards p { font-size:.6rem; } }
+
+
+/* Blend the hardware scene into the light About section. */
+.aboutSection { position:relative; isolation:isolate; overflow:hidden; }
+.aboutSection::before { content:""; position:absolute; inset:0 0 0 47%; z-index:-1; pointer-events:none; background:url('/project-fpga-scene-v1.png') center 72%/cover no-repeat; opacity:.32; mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.12) 25%,#000 100%); }
+.aboutSection .values { padding-top:22px; padding-bottom:22px; }
+@media(max-width:750px) { .aboutSection::before { inset:48% 0 0 15%; opacity:.2; mask-image:linear-gradient(to right,transparent,#000); } }
