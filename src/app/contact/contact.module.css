@@ -17,7 +17,10 @@
 .primary,.outline { display:flex; align-items:center; justify-content:center; gap:16px; min-height:46px; padding:12px 20px; border-radius:6px; font:inherit; font-size:.82rem; font-weight:600; }
 .primary { border:1px solid var(--violet); background:var(--violet); color:white; }
 .outline { border:1px solid rgba(185,160,255,.55); background:transparent; color:var(--white); }
-.channel button { width:100%; margin-top:auto; }
+.channel > a:last-child { width:100%; margin-top:auto; }
+.channelDetail { color:var(--lavender); font-size:.72rem; overflow-wrap:anywhere; margin:-10px 0 20px; }
+.directLinks { display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; margin-top:22px; font-size:.85rem; color:var(--lavender); }
+.channel a:hover,.directLinks a:hover { text-decoration:underline; }
 .page button:disabled { cursor:default; opacity:.65; }
 .resume { margin-top:22px; display:flex; align-items:center; gap:24px; padding:24px 28px; border:1px solid rgba(185,160,255,.3); border-radius:8px; background:rgba(139,92,246,.035); }
 .resume>svg { width:44px; height:48px; color:var(--violet); flex-shrink:0; }

@@ -3,14 +3,15 @@
 Updated October 10, 2026. This is the consolidated content checklist for the later completion pass. Placeholders are intentional until confirmed details are supplied.
 
 ## Contact and resume
-- [ ] Public email chosen for the website
-- [ ] LinkedIn profile URL
-- [ ] GitHub profile URL
+- [x] Public email: ho.jus@northeastern.edu
+- [x] LinkedIn: https://www.linkedin.com/in/JustinMHo
+- [x] GitHub: https://github.com/justinmho2005
+- [x] Phone: (860) 748-3256; portfolio source link added on Contact
 - [ ] Final resume PDF and download link
-- [ ] Replace inactive contact actions and Home social placeholders
+- [x] Connected Contact actions and Home social links; resume PDF remains pending final file confirmation
 
 ## About
-- [x] Home and résumé introductions reflect Justin’s interest in hardware, software, and bringing physical systems to life with code
+- [x] Home and resume introductions reflect Justin’s interest in hardware, software, and bringing physical systems to life with code
 - [x] Added motivation: seeing creations work, tinkering, learning technology’s capabilities, and improving everyday life
 - [ ] Optional personal photograph; current design does not require one
 

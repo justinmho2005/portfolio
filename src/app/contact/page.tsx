@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeader from "../components/SectionHeader";
 import styles from "./contact.module.css";
+import { contact } from "../../data/contact";
 
 export const metadata: Metadata = { title: "Contact | Justin Ho", description: "Connect with Justin Ho about engineering, projects, and future opportunities." };
 
@@ -20,16 +21,17 @@ function Icon({ kind }: { kind: IconKind }) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[kind]} /></svg>;
 }
 
-const channels: { title: string; icon: IconKind; description: string; action: string }[] = [
-  { title: "Email", icon: "email", description: "The quickest way to start a conversation.", action: "Email address to add" },
-  { title: "LinkedIn", icon: "linkedin", description: "Connect professionally and explore my experience.", action: "Profile link to add" },
-  { title: "GitHub", icon: "github", description: "Explore my projects, experiments, and code.", action: "Profile link to add" },
+const channels: { title: string; icon: IconKind; description: string; action: string; href: string; detail: string }[] = [
+  { title: "Email", icon: "email", description: "The quickest way to start a conversation.", action: "Email me", href: contact.emailHref, detail: contact.email },
+  { title: "LinkedIn", icon: "linkedin", description: "Connect professionally and explore my experience.", action: "View LinkedIn", href: contact.linkedin, detail: "linkedin.com/in/JustinMHo" },
+  { title: "GitHub", icon: "github", description: "Explore my projects, experiments, and code.", action: "View GitHub", href: contact.github, detail: "github.com/justinmho2005" },
 ];
 export default function Page() {
   return <><SectionHeader active="Contact" /><main id="main-content" tabIndex={-1} className={styles.page}>
     <section className={styles.hero}><div className="page-shell"><p className={styles.label}>Contact</p><h1>Let’s build<br /><span>something.</span></h1><p className={styles.lead}>Whether you’re interested in my work, have an engineering opportunity, or just want to connect, I’d love to hear from you.</p></div></section>
-    <section className={styles.connect}><div className="page-shell"><p className={styles.label}>01 / Connect</p><h2>Reach out directly.</h2><p className={styles.intro}>I’m always open to conversations about engineering, technology, and interesting problems. My contact links will live here.</p><div className={styles.channels}>{channels.map((channel, index) => <article className={styles.channel} key={channel.title}><div className={styles.channelIcon}><Icon kind={channel.icon} /></div><h3>{channel.title}</h3><p>{channel.description}</p><button className={index === 0 ? styles.primary : styles.outline} type="button" disabled>{channel.action}<span aria-hidden="true">→</span></button></article>)}</div>
-    <div className={styles.resume}><Icon kind="file" /><div><h3>Résumé</h3><p>A concise overview of my education, experience, projects, and technical skills.</p></div><button className={styles.outline} type="button" disabled>Résumé to add <span aria-hidden="true">↓</span></button></div>
+    <section className={styles.connect}><div className="page-shell"><p className={styles.label}>01 / Connect</p><h2>Reach out directly.</h2><p className={styles.intro}>I’m always open to conversations about engineering, technology, and interesting problems. You can reach me by email or connect through the profiles below.</p><div className={styles.channels}>{channels.map((channel, index) => <article className={styles.channel} key={channel.title}><div className={styles.channelIcon}><Icon kind={channel.icon} /></div><h3>{channel.title}</h3><p>{channel.description}</p><a className={styles.channelDetail} href={channel.href}>{channel.detail}</a><a className={index === 0 ? styles.primary : styles.outline} href={channel.href} target={index === 0 ? undefined : "_blank"} rel={index === 0 ? undefined : "noreferrer"}>{channel.action}<span aria-hidden="true">→</span></a></article>)}</div>
+    <div className={styles.directLinks}><a href={contact.phoneHref}>Phone: {contact.phone}</a><a href={contact.portfolioRepository} target="_blank" rel="noreferrer">View this website’s source code ↗</a></div>
+    <div className={styles.resume}><Icon kind="file" /><div><h3>Resume</h3><p>A concise overview of my education, experience, projects, and technical skills.</p></div><button className={styles.outline} type="button" disabled>Resume to add <span aria-hidden="true">↓</span></button></div>
     <div className={styles.opportunities}><p className={styles.label}>02 / More ways to connect</p><h2>Open to what’s next.</h2><div className={styles.opportunityGrid}><article><Icon kind="work" /><div><h3>Engineering opportunities</h3><p>Conversations about hardware, embedded software, and systems engineering.</p></div></article><article><Icon kind="people" /><div><h3>Project collaboration</h3><p>Have a project idea or a technical challenge? Let’s explore what we could build.</p></div></article><article><Icon kind="message" /><div><h3>General questions</h3><p>Questions about my projects, experience, or approach to engineering are welcome.</p></div></article></div></div></div></section>
     <figure className={styles.scene}><Image src="/contact-workspace-v1.png" alt="Illustrative laptop and FPGA workspace overlooking a mountain lake at sunset" fill sizes="100vw" /><figcaption>Illustrative engineering workspace</figcaption></figure>
     <section className={styles.closing}><div className={`page-shell ${styles.closingGrid}`}><div><p className={styles.label}>03 / Final thoughts</p><h2>Thanks for stopping by.</h2><p>I’m excited to meet new people, learn about interesting work, and be part of building what’s next.</p><Link href="/projects" className={styles.explore}>Explore my work →</Link></div><div className={styles.thought}><span aria-hidden="true">“</span><p>Good ideas, great people, and real-world problems—that’s where I want to be.</p></div></div></section>
